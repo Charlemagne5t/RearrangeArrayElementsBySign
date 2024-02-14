@@ -1,30 +1,18 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
-public class Solution {
+class Solution {
     public int[] rearrangeArray(int[] nums) {
         int n = nums.length;
-        Queue<Integer> pos = new LinkedList<>();
-        Queue<Integer> neg = new LinkedList<>();
-
+        int[] res = new int[n];
+        int pos = 0;
+        int neg = 1;
         for(int i = 0; i < n; i++){
             if(nums[i] > 0){
-                pos.offer(nums[i]);
-            }else neg.offer(nums[i]);
-        }
-
-        for(int i = 0;i < n; i++){
-            if(i % 2 == 0){
-                nums[i] = pos.poll();
+                res[pos] = nums[i];
+                pos += 2;
             }else{
-                nums[i] = neg.poll();
+                res[neg] = nums[i];
+                neg += 2;
             }
         }
-        return nums;
-    }
-    private void swap(int i1, int i2, int[] nums){
-        int temp = nums[i1];
-        nums[i1] = nums[i2];
-        nums[i2] = temp;
+        return res;
     }
 }
